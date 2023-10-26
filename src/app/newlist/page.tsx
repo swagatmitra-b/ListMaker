@@ -1,29 +1,16 @@
-"use client";
-
 import Createlist from "@/components/Createlist";
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import { AiFillHome } from "react-icons/ai";
 
 const NewList = () => {
-  const [id, setId] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const lastListId = async () => {
-    const res = await fetch("/api/savelist");
-    const data = await res.json();
-    setId(data.lastList.id + 1);
-    setLoading(true);
-  };
-  useEffect(() => {
-    lastListId();
-  }, []);
   return (
-    <div>
-      <Link href="/">Home</Link>
-      {loading ? (
-        <Createlist id={id} title="New List" info="" />
-      ) : (
-        <p>Loading...</p>
-      )}
+    <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
+      <Link href="/">
+        <button className="absolute top-10 left-32 text-lg p-2 rounded-md border-2 border-black">
+          <AiFillHome />
+        </button>
+      </Link>
+      <Createlist title="New List" info="" />
     </div>
   );
 };
