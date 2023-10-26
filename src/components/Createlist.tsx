@@ -146,7 +146,7 @@ const Createlist = ({ id, title, info }: Info) => {
           <input
             type="text"
             value={list}
-            className="border-2 border-black rounded-md h-14 text-2xl pl-2 w-4/6"
+            className="border-2 border-black rounded-md h-14 text-2xl pl-2 w-5/6"
             onChange={handleChange}
           />
           <button
