@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="flex justify-between max-w-screen-2xl max-h-full p-2">
       <div className="flex flex-col mx-auto gap-2 mt-7 w-5/6 text-center">
-        <h1 className="font-serif text-4xl my-6">List Maker</h1>
+        <h1 className="font-serif text-4xl my-6">Makelister</h1>
         <div className="flex justify-center mb-10">
           <button
             className="p-2 border-2 border-black rounded-lg text-2xl w-1/4"
