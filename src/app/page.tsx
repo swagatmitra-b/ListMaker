@@ -55,10 +55,14 @@ export default function Home() {
                 />
               ))
             ) : (
-              <span className="text-5xl">No List to display</span>
+              <div className="w-full text-center mt-48">
+                <span className="text-4xl">No List to display</span>
+              </div>
             )
           ) : (
-            <p>Loading...</p>
+            <div className="w-full text-center mt-48">
+              <span className="text-4xl">Loading...</span>
+            </div>
           )}
         </div>
       </div>

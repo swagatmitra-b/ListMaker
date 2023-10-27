@@ -9,9 +9,13 @@ interface Info {
   id?: number;
   title: string;
   info: string;
+  time: {
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
-const Createlist = ({ id, title, info }: Info) => {
+const Createlist = ({ id, title, info, time }: Info) => {
   const path = usePathname();
   const router = useRouter();
   const [listTitle, setListTitle] = useState(title);
@@ -20,19 +24,21 @@ const Createlist = ({ id, title, info }: Info) => {
   const add = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLButtonElement;
     const parent = target.parentElement as HTMLElement;
-    const inputVal = parent.querySelector('input') as HTMLInputElement;
+    const inputVal = parent.querySelector("input") as HTMLInputElement;
     const updatedListMembers = [...listMembers];
     const idx = updatedListMembers.indexOf(inputVal.value);
-    updatedListMembers.splice(idx+1, 0, "");
+    updatedListMembers.splice(idx + 1, 0, "");
     setListMembers(updatedListMembers);
   };
 
   const del = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLButtonElement;
     const parent = target.parentElement as HTMLElement;
-    const inputVal = parent.querySelector('input') as HTMLInputElement;
+    const inputVal = parent.querySelector("input") as HTMLInputElement;
     let updatedListMembers = [...listMembers];
-    updatedListMembers = updatedListMembers.filter((text) => text != inputVal.value);
+    updatedListMembers = updatedListMembers.filter(
+      (text) => text != inputVal.value
+    );
     setListMembers(updatedListMembers);
   };
 
@@ -43,7 +49,7 @@ const Createlist = ({ id, title, info }: Info) => {
   const up = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLElement;
     const grandParent = target.parentElement?.parentElement as HTMLElement;
-    const inputVal = grandParent.querySelector('input') as HTMLInputElement;
+    const inputVal = grandParent.querySelector("input") as HTMLInputElement;
     if (inputVal.value == "") return;
     const id = Number(grandParent.getAttribute("id"));
     if (id == 0) return;
@@ -58,7 +64,7 @@ const Createlist = ({ id, title, info }: Info) => {
   const down = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLElement;
     const grandParent = target.parentElement?.parentElement as HTMLElement;
-    const inputVal = grandParent.querySelector('input') as HTMLInputElement;
+    const inputVal = grandParent.querySelector("input") as HTMLInputElement;
     if (inputVal.value == "") return;
     const id = Number(grandParent.getAttribute("id"));
     if (id == listMembers.length - 1) return;
@@ -140,8 +146,16 @@ const Createlist = ({ id, title, info }: Info) => {
           {path == "/newlist" ? "Create" : "Save"}
         </button>
       </div>
+      <div className="flex flex-col gap-2 italic mb-4">
+        <h1>Created: {time.createdAt}</h1>
+        <h1>Last Updated: {time.updatedAt}</h1>
+      </div>
       {listMembers.map((list, i) => (
-        <div className="flex gap-4 border border-gray-400 p-3" key={i} id={String(i)}>
+        <div
+          className="flex gap-4 border border-gray-400 p-3"
+          key={i}
+          id={String(i)}
+        >
           <span className="text-3xl mt-2 w-11">{i + 1}</span>
           <input
             type="text"
