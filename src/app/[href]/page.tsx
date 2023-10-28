@@ -2,7 +2,7 @@
 
 import Createlist from "@/components/Createlist";
 import { useEffect, useState } from "react";
-import { type List } from "@/app/page";
+import { List } from "@/lib/types";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
 import formatDateTime from "@/lib/isoconverter";
@@ -44,7 +44,7 @@ const page = ({ params }: any) => {
         </button>
       </Link>
       {loading && list ? (
-        <Createlist id={id} title={title} info={list.content} time={time}/>
+        <Createlist id={id} title={title} info={list.content} time={time} />
       ) : (
         <p>Loading...</p>
       )}
