@@ -9,7 +9,7 @@ interface Info {
   id?: number;
   title: string;
   info: string;
-  time: {
+  time?: {
     createdAt: string;
     updatedAt: string;
   };
@@ -83,7 +83,7 @@ const Createlist = ({ id, title, info, time }: Info) => {
     setListMembers(updatedList);
   };
 
-  const saveList = async () => {
+  const saveList = async (targetElem: HTMLButtonElement) => {
     try {
       const res = await fetch("/api/savelist", {
         method: "POST",
@@ -94,9 +94,12 @@ const Createlist = ({ id, title, info, time }: Info) => {
       });
       if (res.ok) {
         const data = await res.json();
-        console.error(data);
+        console.log(data);
+        targetElem.innerText = "Saved";
+        setTimeout(() => (targetElem.innerText = "Save"), 1500);
       } else {
-        console.error("Error:");
+        targetElem.innerText = "Oops :(";
+        setTimeout(() => (targetElem.innerText = "Save"), 2000);
       }
     } catch (err) {
       console.error("Fetch error:", err);
@@ -114,7 +117,7 @@ const Createlist = ({ id, title, info, time }: Info) => {
       });
       if (res.ok) {
         const data = await res.json();
-        console.error(data);
+        console.log(data);
         router.push("/");
       } else {
         console.error("Error:");
@@ -140,16 +143,18 @@ const Createlist = ({ id, title, info, time }: Info) => {
           onClick={(e) => {
             const target = e.target as HTMLButtonElement;
             if (target.innerText == "Create") createList();
-            else saveList();
+            else saveList(target);
           }}
         >
           {path == "/newlist" ? "Create" : "Save"}
         </button>
       </div>
-      <div className="flex flex-col gap-2 italic mb-4">
-        <h1>Created: {time.createdAt}</h1>
-        <h1>Last Updated: {time.updatedAt}</h1>
-      </div>
+      {time ? (
+        <div className="flex flex-col gap-2 italic mb-4">
+          <h1>Created: {time.createdAt}</h1>
+          <h1>Last Updated: {time.updatedAt}</h1>
+        </div>
+      ) : null}
       {listMembers.map((list, i) => (
         <div
           className="flex gap-4 border border-gray-400 p-3"
