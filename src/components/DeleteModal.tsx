@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { contextDispenser } from "@/app/page";
+import contextDispenser from "@/lib/contextDispenser";
 
 const DeleteModal = () => {
   const { modal, setModal } = contextDispenser();

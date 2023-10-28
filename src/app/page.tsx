@@ -1,16 +1,10 @@
 "use client";
 import Listouter from "@/components/Listouter";
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DeleteModal from "@/components/DeleteModal";
-import { List, ContextValue } from "@/lib/types";
-
-const DeleteContext = createContext<ContextValue | null>(null);
-
-export const contextDispenser = () => {
-  const values = useContext(DeleteContext) as ContextValue;
-  return values;
-};
+import { List } from "@/lib/types";
+import { DeleteContext } from "@/lib/contextDispenser";
 
 export default function Home() {
   const router = useRouter();

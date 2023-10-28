@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 import { List } from "@/lib/types";
-import { contextDispenser } from "@/app/page";
+import contextDispenser from "@/lib/contextDispenser";
 
 const Listouter = ({ id, title, content }: List) => {
   const { modal, setModal } = contextDispenser();
