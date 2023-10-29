@@ -84,6 +84,7 @@ const Createlist = ({ id, title, info, time }: Info) => {
   };
 
   const saveList = async (targetElem: HTMLButtonElement) => {
+    targetElem.innerText = "Saving..."
     try {
       const res = await fetch("/api/savelist", {
         method: "POST",
