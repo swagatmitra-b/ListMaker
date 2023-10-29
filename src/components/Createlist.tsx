@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect, ChangeEvent, MouseEvent } from "react";
+import { useState, ChangeEvent, MouseEvent, useRef } from "react";
 import { FaArrowUp, FaArrowDown, FaTrash } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 
@@ -16,6 +16,7 @@ interface Info {
 }
 
 const Createlist = ({ id, title, info, time }: Info) => {
+  const parentDivRef = useRef<HTMLDivElement | null>(null);
   const path = usePathname();
   const router = useRouter();
   const [listTitle, setListTitle] = useState(title);
@@ -24,27 +25,22 @@ const Createlist = ({ id, title, info, time }: Info) => {
   const add = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLButtonElement;
     const parent = target.parentElement as HTMLElement;
-    const inputVal = parent.querySelector("input") as HTMLInputElement;
+    const swapInput = parent.querySelector("#swap") as HTMLInputElement;
     const updatedListMembers = [...listMembers];
-    const idx = updatedListMembers.indexOf(inputVal.value);
-    updatedListMembers.splice(idx + 1, 0, "");
+    console.log(swapInput.value);
+    console.log(updatedListMembers[+swapInput.value]);
+    updatedListMembers.splice(+swapInput.value, 0, "");
     setListMembers(updatedListMembers);
   };
 
   const del = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLButtonElement;
     const parent = target.parentElement as HTMLElement;
-    const inputVal = parent.querySelector("input") as HTMLInputElement;
+    const swapInput = parent.querySelector("#swap") as HTMLInputElement;
     let updatedListMembers = [...listMembers];
-    updatedListMembers = updatedListMembers.filter(
-      (text) => text != inputVal.value
-    );
+    updatedListMembers.splice(+swapInput.value - 1, 1);
     setListMembers(updatedListMembers);
   };
-
-  useEffect(() => {
-    console.log(listMembers);
-  }, [listMembers]);
 
   const up = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLElement;
@@ -84,7 +80,7 @@ const Createlist = ({ id, title, info, time }: Info) => {
   };
 
   const saveList = async (targetElem: HTMLButtonElement) => {
-    targetElem.innerText = "Saving..."
+    targetElem.innerText = "Saving...";
     try {
       const res = await fetch("/api/savelist", {
         method: "POST",
@@ -128,8 +124,33 @@ const Createlist = ({ id, title, info, time }: Info) => {
     }
   };
 
+  const swapfn = (e: MouseEvent) => {
+    const target = e.target as HTMLButtonElement;
+    const parent = target.parentElement as HTMLElement;
+    const swapInput = parent.querySelector("#swap") as HTMLInputElement;
+    const nextVal = swapInput.nextElementSibling as HTMLInputElement;
+    const main = parentDivRef.current as HTMLElement;
+    const inputArray: HTMLInputElement[] = Array.from(
+      main.querySelectorAll("input#swap")
+    );
+    if (Number.isNaN(+swapInput.value) || +swapInput.value > listMembers.length) {
+      inputArray.forEach((input, i) => (input.value = String(i + 1)));
+      return;
+    }
+    const updatedList = [...listMembers];
+    const a = updatedList[+swapInput.value - 1];
+    updatedList.splice(+swapInput.value - 1, 1, nextVal.value);
+    updatedList.splice(+swapInput.defaultValue - 1, 1, a);
+    setListMembers(updatedList);
+
+    inputArray.forEach((input, i) => (input.value = String(i + 1)));
+  };
+
   return (
-    <div className="flex flex-col mt-10 w-5/6 text-center mb-20">
+    <div
+      className="flex flex-col mt-10 w-5/6 text-center mb-20"
+      ref={parentDivRef}
+    >
       <div>
         <input
           type="text"
@@ -162,12 +183,17 @@ const Createlist = ({ id, title, info, time }: Info) => {
           key={i}
           id={String(i)}
         >
-          <span className="text-3xl mt-2 w-11">{i + 1}</span>
+          <input
+            className="text-3xl mt-2 w-16 text-center px-1"
+            defaultValue={i + 1}
+            id="swap"
+          />
           <input
             type="text"
             value={list}
             className="border-2 border-black rounded-md h-14 text-2xl pl-2 w-5/6"
             onChange={handleChange}
+            id="listinput"
           />
           <button
             className="border-2 border-black p-2 text-lg rounded-md"
@@ -195,6 +221,12 @@ const Createlist = ({ id, title, info, time }: Info) => {
               <FaArrowDown />
             </button>
           </div>
+          <button
+            className="border-2 border-black p-3 rounded-md"
+            onClick={swapfn}
+          >
+            Swap
+          </button>
         </div>
       ))}
     </div>
