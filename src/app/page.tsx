@@ -5,8 +5,11 @@ import { useRouter } from "next/navigation";
 import DeleteModal from "@/components/DeleteModal";
 import { List } from "@/lib/types";
 import { DeleteContext } from "@/lib/contextDispenser";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  console.log(session, status);
   const router = useRouter();
   const [lists, setLists] = useState<List[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,9 +50,6 @@ export default function Home() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   console.log(lists);
-  // }, [lists]);
   useEffect(() => {
     if (modal.confirm) handleDelete(modal.id);
   }, [modal.confirm]);
