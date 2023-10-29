@@ -128,7 +128,7 @@ const Createlist = ({ id, title, info, time }: Info) => {
   };
 
   return (
-    <div className="flex flex-col mt-10 w-5/6 text-center">
+    <div className="flex flex-col mt-10 w-5/6 text-center mb-20">
       <div>
         <input
           type="text"
