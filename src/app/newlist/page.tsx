@@ -1,8 +1,12 @@
 import Createlist from "@/components/Createlist";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
+import { getServerSession } from "next-auth";
 
-const NewList = () => {
+const NewList = async () => {
+  const session = await getServerSession();
+  const username = session?.user?.name as string;
+  console.log(username);
   return (
     <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
       <Link href="/">
@@ -10,7 +14,7 @@ const NewList = () => {
           <AiFillHome />
         </button>
       </Link>
-      <Createlist title="New List" info="" />
+      <Createlist title="New List" info="" username={username}/>
     </div>
   );
 };

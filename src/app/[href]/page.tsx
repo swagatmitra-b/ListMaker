@@ -6,8 +6,12 @@ import { List } from "@/lib/types";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
 import formatDateTime from "@/lib/isoconverter";
+import { useSession } from "next-auth/react";
 
 const page = ({ params }: any) => {
+  const { data: session, status } = useSession();
+  const username = session?.user?.name as string;
+  console.log(username, status);
   let [stringId, ...rest] = decodeURI(params.href).split(" ");
   const id = +stringId;
   const title = rest.join(" ");
@@ -18,9 +22,9 @@ const page = ({ params }: any) => {
   const [list, setList] = useState<List | null>(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("/api/lists", {
+    fetch("/api/useronelist", {
       method: "POST",
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ id, username }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -44,7 +48,7 @@ const page = ({ params }: any) => {
         </button>
       </Link>
       {loading && list ? (
-        <Createlist id={id} title={title} info={list.content} time={time} />
+        <Createlist id={id} title={title} info={list.content} time={time} username={username} />
       ) : (
         <p>Loading...</p>
       )}

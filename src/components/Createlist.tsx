@@ -6,6 +6,7 @@ import { FaArrowUp, FaArrowDown, FaTrash } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 
 interface Info {
+  username: string
   id?: number;
   title: string;
   info: string;
@@ -15,13 +16,13 @@ interface Info {
   };
 }
 
-const Createlist = ({ id, title, info, time }: Info) => {
+const Createlist = ({ id, title, info, time, username }: Info) => {
   const parentDivRef = useRef<HTMLDivElement | null>(null);
   const path = usePathname();
   const router = useRouter();
   const [listTitle, setListTitle] = useState(title);
   const [listMembers, setListMembers] = useState(info.split(";"));
-
+  console.log(username);
   const add = (e: MouseEvent) => {
     const target = e.currentTarget as HTMLButtonElement;
     const parent = target.parentElement as HTMLElement;
@@ -82,9 +83,9 @@ const Createlist = ({ id, title, info, time }: Info) => {
   const saveList = async (targetElem: HTMLButtonElement) => {
     targetElem.innerText = "Saving...";
     try {
-      const res = await fetch("/api/savelist", {
+      const res = await fetch("/api/usersavelist", {
         method: "POST",
-        body: JSON.stringify({ id, title: listTitle, listMembers }),
+        body: JSON.stringify({ id, title: listTitle, listMembers, username }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -105,9 +106,9 @@ const Createlist = ({ id, title, info, time }: Info) => {
 
   const createList = async () => {
     try {
-      const res = await fetch("/api/createlist", {
+      const res = await fetch("/api/usercreatelist", {
         method: "POST",
-        body: JSON.stringify({ title: listTitle, listMembers }),
+        body: JSON.stringify({ username, title: listTitle, listMembers }),
         headers: {
           "Content-Type": "application/json",
         },

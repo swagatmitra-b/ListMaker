@@ -8,8 +8,8 @@ const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   pages: {
-    signIn: "/login",
-    signOut: "/",
+    signIn: "/signin",
+    signOut: "/signin",
   },
   providers: [
     Credentials({
@@ -37,6 +37,7 @@ const authOptions: NextAuthOptions = {
           console.log(isTrue)
           if (isTrue) {
             return {
+                id: "",
                 name: username
             }
           }
