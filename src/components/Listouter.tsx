@@ -6,8 +6,8 @@ import contextDispenser from "@/lib/contextDispenser";
 const Listouter = ({ id, title, content }: List) => {
   const { modal, setModal } = contextDispenser();
   return (
-    <Link href={`${id} ${title}`}>
-      <div className="border-2 border-gray-800 max-w-md rounded-lg cursor-pointer relative">
+    <Link href={`/home/${id} ${title}`}>
+      <div className="border-2 border-gray-800 max-w-md rounded-lg cursor-pointer relative shadow-xl">
         <button
           className="absolute right-1 border-2 border-black p-2 rounded-lg top-1"
           onClick={(e) => {

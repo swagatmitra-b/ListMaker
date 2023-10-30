@@ -10,12 +10,16 @@ export type ContextValue = {
     id: number;
     clicked: boolean;
     confirm: boolean;
+    userconfirm: boolean;
+    userclicked: boolean;
   };
   setModal: Dispatch<
     SetStateAction<{
       id: number;
       clicked: boolean;
       confirm: boolean;
+      userconfirm: boolean;
+      userclicked: boolean;
     }>
   >;
 };
