@@ -1,49 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const Signin = () => {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  const button = ref.current as HTMLButtonElement;
   const router = useRouter();
   const [creds, setCreds] = useState({
     username: "",
     password: "",
   });
   const loginUser = async () => {
-    // if (creds.username == "" || creds.password == "") {
-    //   console.log("Cannot be empty");
-    //   return;
-    // }
-    // try {
-    //   const res = await fetch("/api/signin", {
-    //     method: "POST",
-    //     body: JSON.stringify(creds),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   if (res.ok) {
-    //     const data = await res.json();
-    //     console.log(data);
-    //   } else {
-    //     console.error("Error");
-    //   }
-    // } catch (error) {
-    //   console.log("Error");
-    // }
+    button.innerText = "Signing in...";
     const res = await signIn("credentials", {
       ...creds,
       redirect: false,
     });
     console.log(res);
-    if (!res?.error) {
-      router.push("/");
-      router.refresh();
+    if (res?.error) {
+      button.innerText = "Credentials error!";
+      setTimeout(() => (button.innerText = "Sign in"), 2000);
+    } else {
+      router.push("/home");
     }
   };
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="border border-black flex flex-col p-10 py-12 rounded-lg gap-5 text-center w-1/4">
+      <div className="border border-black flex flex-col p-10 py-12 rounded-lg gap-5 text-center w-1/4 shadow-lg">
         <h1 className="text-xl mb-5">Sign in with your user</h1>
         <div className="flex justify-between">
           <h2 className="">Username</h2>
@@ -76,9 +60,13 @@ const Signin = () => {
         <button
           className="border-2 border-black p-3 rounded-md text-lg"
           onClick={loginUser}
+          ref={ref}
         >
           Sign in
         </button>
+        <h1>
+          Don't have an account? <a href="/signup" className="underline text-blue-700">signup</a>
+        </h1>
       </div>
     </div>
   );

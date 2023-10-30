@@ -42,7 +42,7 @@ const page = ({ params }: any) => {
 
   return (
     <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
-      <Link href="/">
+      <Link href="/home">
         <button className="absolute top-10 left-32 text-lg p-2 rounded-md border-2 border-black">
           <AiFillHome />
         </button>

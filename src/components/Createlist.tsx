@@ -104,7 +104,8 @@ const Createlist = ({ id, title, info, time, username }: Info) => {
     }
   };
 
-  const createList = async () => {
+  const createList = async (targetElem: HTMLButtonElement) => {
+    targetElem.innerText = "Creating..."
     try {
       const res = await fetch("/api/usercreatelist", {
         method: "POST",
@@ -116,7 +117,7 @@ const Createlist = ({ id, title, info, time, username }: Info) => {
       if (res.ok) {
         const data = await res.json();
         console.log(data);
-        router.push("/");
+        router.push("/home");
       } else {
         console.error("Error:");
       }
@@ -165,11 +166,11 @@ const Createlist = ({ id, title, info, time, username }: Info) => {
           className="p-2 border-2 border-black rounded-md w-1/6 text-lg mb-9"
           onClick={(e) => {
             const target = e.target as HTMLButtonElement;
-            if (target.innerText == "Create") createList();
+            if (target.innerText == "Create") createList(target);
             else saveList(target);
           }}
         >
-          {path == "/newlist" ? "Create" : "Save"}
+          {path == "/home/newlist" ? "Create" : "Save"}
         </button>
       </div>
       {time ? (

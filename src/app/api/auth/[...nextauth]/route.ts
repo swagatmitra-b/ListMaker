@@ -9,7 +9,7 @@ const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/signin",
-    signOut: "/signin",
+    signOut: "/",
   },
   providers: [
     Credentials({
@@ -23,26 +23,21 @@ const authOptions: NextAuthOptions = {
           "username" | "password",
           string
         >;
-        console.log(username, password);
-
         const user = await prisma.user.findUnique({
           where: {
             username,
           },
         });
 
-        console.log(user);
         if (user) {
           const isTrue = await bcrypt.compare(password, user.password);
-          console.log(isTrue)
           if (isTrue) {
             return {
-                id: "",
-                name: username
-            }
+              id: "",
+              name: username,
+            };
           }
-          console.log("invalid pass");
-          return null;
+          return null
         }
         return null;
       },

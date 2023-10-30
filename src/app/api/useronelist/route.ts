@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const list = await prisma.lists.findUnique({
       where: {
         id,
-        creatorId: user.id
+        creatorId: user.id,
       },
     });
     return NextResponse.json({ list });
