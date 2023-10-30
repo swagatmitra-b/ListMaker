@@ -19,7 +19,7 @@ const DeleteModal = () => {
     <div
       className={`${
         modal.clicked ? "block" : "hidden"
-      } fixed z-40 top-1/3 bg-gray-400 p-6 rounded-lg border-2 border-black py-10`}
+      } fixed z-40 top-1/3 bg-sky-100 p-6 rounded-lg border-2 border-black py-10`}
     >
       <h1 className="text-2xl">Are you sure you want to delete this {modal.userclicked ? "user": "list"}?</h1>
       <div className="text-lg mt-5">

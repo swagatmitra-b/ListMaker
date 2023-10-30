@@ -9,7 +9,7 @@ import { useSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const username = session?.user?.name as string;
   const router = useRouter();
   const [lists, setLists] = useState<List[]>([]);
@@ -60,7 +60,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (modal.confirm) deleteList(modal.id)
+    if (modal.confirm) deleteList(modal.id);
   }, [modal.confirm]);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
           <div className="absolute top-16 right-28 flex gap-5">
             <button
-              className="border-2 border-black p-2 rounded-md text-sm font-semibold"
+              className="border-2 border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200"
               onClick={() => {
                 signOut();
               }}
@@ -103,7 +103,7 @@ export default function Home() {
               Sign Out
             </button>
             <button
-              className="border-2 border-black p-2 rounded-md text-sm font-semibold"
+              className="border-2 border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200"
               onClick={() => {
                 setModal({ ...modal, clicked: true, userclicked: true });
               }}
