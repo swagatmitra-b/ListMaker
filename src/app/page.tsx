@@ -49,7 +49,7 @@ const Page = () => {
       <h1 className="italic absolute right-10 bottom-4">
         created by{" "}
         <a href="https://github.com/swagatmitra-b" className="underline">
-          Swagat
+          swagat
         </a>
       </h1>
     </div>
