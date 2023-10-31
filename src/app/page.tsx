@@ -1,10 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 const Page = () => {
-  const { data: session, status } = useSession();
   const [text, setText] = useState("");
   const line = "An app to help you make lists.";
   const indexRef = useRef(0);

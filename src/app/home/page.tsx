@@ -46,7 +46,7 @@ export default function Home() {
     fetch("/api/usergetlist", {
       method: "POST",
       body: JSON.stringify({
-        username: session?.user?.name,
+        username
       }),
       headers: {
         "Content-Type": "application/json",
@@ -132,8 +132,8 @@ export default function Home() {
                   />
                 ))
               ) : (
-                <div className="w-full text-center mt-40">
-                  <span className="text-4xl">No List to display</span>
+                <div className="w-full text-center sm:mt-40 mt-10">
+                  <span className="sm:text-4xl text-lg">No List to display</span>
                 </div>
               )
             ) : (
