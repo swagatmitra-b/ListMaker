@@ -4,7 +4,7 @@ import SessionProvider from "@/components/SessionProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "List Maker",
+  title: "Makelister",
   description: "An app for your lists",
 };
 
