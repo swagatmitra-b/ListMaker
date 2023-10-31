@@ -26,7 +26,7 @@ const Page = () => {
 
   return (
     <div className="relative">
-      <nav className="flex gap-7 absolute top-10 right-10">
+      <nav className="flex gap-7 absolute top-10 sm:right-10 right-28">
         <Link href="/signup">
           <button className="border-2 border-black p-2 rounded-md font-semibold hover:bg-black hover:text-white ease-in duration-200">
             Sign Up

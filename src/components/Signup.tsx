@@ -43,14 +43,14 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="border border-black flex flex-col p-10 py-12 rounded-lg gap-5 text-center w-1/4 shadow-lg">
+      <div className="border border-black flex flex-col p-10 py-12 rounded-lg gap-5 text-center sm:w-1/4 shadow-lg">
         <h1 className="text-xl mb-5">Create your user</h1>
         <div className="flex justify-between">
           <h2 className="">Username</h2>
           <input
             type="text"
             name="username"
-            className="border-2 border-black rounded-md p-1"
+            className="border-2 border-black rounded-md p-1 ml-3"
             onChange={(e) =>
               setCreds({
                 ...creds,

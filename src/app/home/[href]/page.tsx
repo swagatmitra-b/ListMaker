@@ -9,9 +9,8 @@ import formatDateTime from "@/lib/isoconverter";
 import { useSession } from "next-auth/react";
 
 const page = ({ params }: any) => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const username = session?.user?.name as string;
-  console.log(username, status);
   let [stringId, ...rest] = decodeURI(params.href).split(" ");
   const id = +stringId;
   const title = rest.join(" ");
@@ -43,12 +42,18 @@ const page = ({ params }: any) => {
   return (
     <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
       <Link href="/home">
-        <button className="absolute top-10 left-32 text-lg p-2 rounded-md border-2 border-black">
+        <button className="sm:absolute sm:top-10 sm:left-32 text-lg p-2 rounded-md border-2 border-black absolute left-8 top-6">
           <AiFillHome />
         </button>
       </Link>
       {loading && list ? (
-        <Createlist id={id} title={title} info={list.content} time={time} username={username} />
+        <Createlist
+          id={id}
+          title={title}
+          info={list.content}
+          time={time}
+          username={username}
+        />
       ) : (
         <p>Loading...</p>
       )}

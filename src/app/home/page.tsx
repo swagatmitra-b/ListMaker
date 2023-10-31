@@ -93,7 +93,7 @@ export default function Home() {
           <div className="flex flex-col gap-2 italic mb-4">
             <h1>Logged in as {username}</h1>
           </div>
-          <div className="absolute top-16 right-28 flex gap-5">
+          <div className="sm:absolute top-16 sm:right-28 flex gap-5 ml-14 my-10">
             <button
               className="border-2 border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200"
               onClick={() => {
@@ -113,7 +113,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center mb-10">
             <button
-              className="p-2 border-2 border-black rounded-lg text-2xl w-1/4"
+              className="p-2 border-2 border-black rounded-lg text-2xl sm:w-1/4"
               onClick={() => router.push("/home/newlist")}
             >
               Create List

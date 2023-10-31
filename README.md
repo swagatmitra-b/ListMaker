@@ -1,3 +1,4 @@
-# List-App
+# Makelister
 
-An app to create Lists
+Make awesome ordered lists in a jiffy. 
+
