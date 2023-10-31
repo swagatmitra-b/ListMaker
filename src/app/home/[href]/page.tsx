@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { List } from "@/lib/types";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
-import { BsShareFill } from "react-icons/bs";
+import { BiSolidDownload } from "react-icons/bi";
+import { GrDownload } from "react-icons/gr";
 import formatDateTime from "@/lib/isoconverter";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -53,10 +54,10 @@ const page = ({ params }: any) => {
         </button>
       </Link>
       <button
-        className="absolute rounded-md border-2 border-black p-2 top-10 right-32"
+        className="absolute rounded-md border-2 border-black p-2 top-10 right-32 text-lg"
         onClick={() => window.print()}
       >
-        <BsShareFill />
+        <BiSolidDownload />
       </button>
       {loading && list ? (
         <Createlist

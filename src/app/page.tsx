@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 const Page = () => {
+  const { data: session } = useSession();
   const [text, setText] = useState("");
   const line = "An app to help you make lists.";
   const indexRef = useRef(0);
@@ -20,6 +23,10 @@ const Page = () => {
       clearInterval(timer);
     };
   }, []);
+
+  if (session) {
+    redirect("/home");
+  }
 
   return (
     <div className="relative">
