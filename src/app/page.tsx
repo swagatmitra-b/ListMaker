@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 const Page = () => {
   const { data: session, status } = useSession();
-  console.log(session?.user?.name, session?.expires, status);
   const [text, setText] = useState("");
   const line = "An app to help you make lists.";
   const indexRef = useRef(0);
