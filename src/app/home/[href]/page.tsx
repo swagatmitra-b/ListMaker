@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { List } from "@/lib/types";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
+import { BsShareFill } from "react-icons/bs";
 import formatDateTime from "@/lib/isoconverter";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -51,6 +52,12 @@ const page = ({ params }: any) => {
           <AiFillHome />
         </button>
       </Link>
+      <button
+        className="absolute rounded-md border-2 border-black p-2 top-10 right-32"
+        onClick={() => window.print()}
+      >
+        <BsShareFill />
+      </button>
       {loading && list ? (
         <Createlist
           id={id}

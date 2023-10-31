@@ -46,7 +46,7 @@ export default function Home() {
     fetch("/api/usergetlist", {
       method: "POST",
       body: JSON.stringify({
-        username
+        username,
       }),
       headers: {
         "Content-Type": "application/json",
