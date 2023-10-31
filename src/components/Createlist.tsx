@@ -119,7 +119,9 @@ const Createlist = ({ id, title, info, time, username }: Info) => {
       if (res.ok) {
         router.push("/home");
       } else {
-        console.error("Error:");
+        console.error("error");
+        targetElem.innerText = "Oops :(";
+        setTimeout(() => (targetElem.innerText = "Create"), 2000);
       }
     } catch (err) {
       console.error("Fetch error", err);

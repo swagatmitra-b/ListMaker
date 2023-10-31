@@ -7,6 +7,7 @@ import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
 import formatDateTime from "@/lib/isoconverter";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const page = ({ params }: any) => {
   const { data: session } = useSession();
@@ -38,6 +39,10 @@ const page = ({ params }: any) => {
         setLoading(true);
       });
   }, []);
+
+  if (!session) {
+    redirect("/");
+  }
 
   return (
     <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
