@@ -13,7 +13,7 @@ const NewList = async () => {
   return (
     <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
       <Link href="/home">
-        <button className="sm:absolute sm:top-10 sm:left-32 text-lg p-2 rounded-md border-2 border-black absolute left-8 top-6">
+        <button className="sm:absolute sm:top-10 sm:left-32 text-lg p-2 rounded-md border-2 border-black absolute left-8 top-6 dark:border-white">
           <AiFillHome />
         </button>
       </Link>

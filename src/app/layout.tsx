@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/components/SessionProvider";
 import "./globals.css";
+import ThemeContext from "@/components/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Makelister",
@@ -15,9 +16,16 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession();
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className="light"
+      style={{ colorScheme: "light" }}
+      suppressHydrationWarning
+    >
       <body>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <ThemeContext>
+          <SessionProvider session={session}>{children}</SessionProvider>
+        </ThemeContext>
       </body>
     </html>
   );

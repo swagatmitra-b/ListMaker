@@ -6,12 +6,12 @@ const DeleteModal = () => {
   const confirmation = (e: MouseEvent) => {
     const target = e.target as HTMLButtonElement;
     if (target.innerText == "Yes" && modal.userclicked) {
-      setModal({...modal, clicked: false, userconfirm: true});
-      return
+      setModal({ ...modal, clicked: false, userconfirm: true });
+      return;
     }
     if (target.innerText == "Yes") {
       setModal({ ...modal, clicked: false, confirm: true });
-      return
+      return;
     }
     setModal({ ...modal, clicked: false, userclicked: false });
   };
@@ -19,18 +19,21 @@ const DeleteModal = () => {
     <div
       className={`${
         modal.clicked ? "block" : "hidden"
-      } fixed z-40 top-1/3 bg-sky-100 p-6 rounded-lg border-2 border-black py-10`}
+      } fixed z-40 top-1/3 bg-sky-100 p-6 rounded-lg border-2 border-black py-10 dark:bg-neutral-900 dark:border-white`}
     >
-      <h1 className="text-2xl">Are you sure you want to delete this {modal.userclicked ? "user": "list"}?</h1>
+      <h1 className="text-2xl">
+        Are you sure you want to delete this{" "}
+        {modal.userclicked ? "user" : "list"}?
+      </h1>
       <div className="text-lg mt-5">
         <button
-          className="border-2 border-black py-2 px-6 mr-5 rounded-md bg-white"
+          className="border-2 dark:border-white dark:bg-slate-900 border-black py-2 px-6 mr-5 rounded-md bg-white"
           onClick={(e) => confirmation(e)}
         >
           Yes
         </button>
         <button
-          className="border-2 border-black py-2 px-6 ml-5 rounded-md bg-white"
+          className="border-2 dark:border-white dark:bg-slate-900 border-black py-2 px-6 ml-5 rounded-md bg-white"
           onClick={(e) => confirmation(e)}
         >
           No

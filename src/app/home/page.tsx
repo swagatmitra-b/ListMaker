@@ -7,6 +7,7 @@ import { List } from "@/lib/types";
 import { DeleteContext } from "@/lib/contextDispenser";
 import { useSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
+import Themebutton from "@/components/Themebutton";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -86,7 +87,8 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-between max-w-screen-2xl max-h-full p-2 relative">
+    <div className="flex justify-between max-w-screen-2xl max-h-full p-2 relative min-h-screen">
+      <Themebutton />
       <DeleteContext.Provider value={{ modal, setModal }}>
         <div className="flex flex-col mx-auto gap-2 mt-7 w-5/6 text-center">
           <h1 className="font-serif text-4xl my-6">Makelister</h1>
@@ -95,7 +97,7 @@ export default function Home() {
           </div>
           <div className="sm:absolute top-16 sm:right-28 flex gap-5 ml-14 my-10">
             <button
-              className="border-2 border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200"
+              className="border-2 dark:border-white border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200 dark:hover:bg-white dark:hover:text-black"
               onClick={() => {
                 signOut();
               }}
@@ -103,17 +105,17 @@ export default function Home() {
               Sign Out
             </button>
             <button
-              className="border-2 border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200"
+              className="border-2 dark:border-white border-black p-2 rounded-md text-sm font-semibold  hover:bg-black hover:text-white ease-in duration-200 dark:hover:bg-white dark:hover:text-black"
               onClick={() => {
                 setModal({ ...modal, clicked: true, userclicked: true });
               }}
             >
-              Delete user
+              Delete User
             </button>
           </div>
           <div className="flex justify-center mb-10">
             <button
-              className="p-2 border-2 border-black rounded-lg text-2xl sm:w-1/4"
+              className="p-2 border-2 dark:border-white border-black rounded-lg text-2xl sm:w-1/4 hover:text-white hover:bg-black dark:hover:text-black dark:hover:bg-white duration-200"
               onClick={() => router.push("/home/newlist")}
             >
               Create List
@@ -133,7 +135,9 @@ export default function Home() {
                 ))
               ) : (
                 <div className="w-full text-center sm:mt-40 mt-10">
-                  <span className="sm:text-4xl text-lg">No List to display</span>
+                  <span className="sm:text-4xl text-lg">
+                    No List to display
+                  </span>
                 </div>
               )
             ) : (

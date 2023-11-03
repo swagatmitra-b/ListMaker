@@ -6,7 +6,6 @@ import { List } from "@/lib/types";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
 import { BiSolidDownload } from "react-icons/bi";
-import { GrDownload } from "react-icons/gr";
 import formatDateTime from "@/lib/isoconverter";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -49,12 +48,12 @@ const page = ({ params }: any) => {
   return (
     <div className="flex flex-col items-center gap-4 max-w-screen-2xl">
       <Link href="/home">
-        <button className="sm:absolute sm:top-10 sm:left-32 text-lg p-2 rounded-md border-2 border-black absolute left-8 top-6">
+        <button className="sm:absolute dark:border-white sm:top-10 sm:left-32 text-lg p-2 rounded-md border-2 border-black absolute left-8 top-6">
           <AiFillHome />
         </button>
       </Link>
       <button
-        className="absolute rounded-md border-2 border-black p-2 top-10 right-32 text-lg"
+        className="absolute rounded-md border-2 dark:border-white border-black p-2 top-10 right-32 text-lg"
         onClick={() => window.print()}
       >
         <BiSolidDownload />

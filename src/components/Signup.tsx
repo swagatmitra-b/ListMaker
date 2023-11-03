@@ -1,16 +1,16 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 
 const Signup = () => {
-  const ref = useRef<HTMLButtonElement | null>(null);
-  const button = ref.current as HTMLButtonElement;
   const router = useRouter();
   const [creds, setCreds] = useState({
     username: "",
     password: "",
   });
-  const createUser = async () => {
+  const createUser = async (e: MouseEvent) => {
+    const button = e.target as HTMLButtonElement;
+    console.log(button)
     if (creds.username == "" || creds.password == "") {
       button.innerText = "The fields cannot be empty!";
       setTimeout(() => (button.innerText = "Create"), 2000);
@@ -41,9 +41,10 @@ const Signup = () => {
       console.log("Error");
     }
   };
+
   return (
     <div className="min-h-screen flex justify-center items-center">
-      <div className="border border-black flex flex-col p-10 py-12 rounded-lg gap-5 text-center sm:w-1/4 shadow-lg">
+      <div className="border border-black flex flex-col p-10 py-12 rounded-lg gap-5 text-center sm:w-1/4 shadow-lg dark:border-white">
         <h1 className="text-xl mb-5">Create your user</h1>
         <div className="flex justify-between">
           <h2 className="">Username</h2>
@@ -74,9 +75,8 @@ const Signup = () => {
           />
         </div>
         <button
-          className="border-2 border-black p-3 rounded-md text-lg"
+          className="border-2 border-black p-3 rounded-md text-lg dark:border-white dark:hover:text-black dark:hover:bg-white ease-in duration-200 hover:bg-neutral-900 hover:text-white"
           onClick={createUser}
-          ref={ref}
         >
           Create
         </button>

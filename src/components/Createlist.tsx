@@ -169,7 +169,7 @@ const Createlist = ({ id, title, info, time, username }: Info) => {
       </div>
       <div className="flex justify-center mt-5">
         <button
-          className="p-2 border-2 border-black rounded-md sm:w-1/6 text-lg mb-9"
+          className="p-2 border-2 border-black rounded-md sm:w-1/6 text-lg mb-9 dark:border-white"
           onClick={(e) => {
             const target = e.target as HTMLButtonElement;
             if (target.innerText == "Create") createList(target);
@@ -207,33 +207,33 @@ const Createlist = ({ id, title, info, time, username }: Info) => {
           </div>
           <div className="flex gap-4 justify-center">
             <button
-              className="border-2 border-black p-2 text-lg rounded-md"
+              className="border-2 border-black p-2 text-lg rounded-md dark:border-white"
               onClick={add}
             >
               <BsPlusLg />
             </button>
             <button
-              className="border-2 border-black p-2 text-lg rounded-md"
+              className="border-2 border-black p-2 text-lg rounded-md dark:border-white"
               onClick={del}
             >
               <FaTrash />
             </button>
             <div className="flex flex-col">
               <button
-                className="border-2 border-black p-1 rounded-sm"
+                className="border-2 border-black p-1 rounded-sm dark:border-white"
                 onClick={up}
               >
                 <FaArrowUp />
               </button>
               <button
-                className="border-2 border-black p-1 rounded-sm"
+                className="border-2 border-black p-1 rounded-sm dark:border-white"
                 onClick={down}
               >
                 <FaArrowDown />
               </button>
             </div>
             <button
-              className="border-2 border-black p-3 rounded-md"
+              className="border-2 border-black p-3 rounded-md dark:border-white"
               onClick={swapfn}
             >
               Swap
